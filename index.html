@@ -141,11 +141,19 @@ footer {
   <h2>Изпрати запитване към адвокат</h2>
 
   <div id="form-container">
-    <form id="legalForm">
-      <input type="text" id="name" placeholder="Име" required>
-      <input type="email" id="email" placeholder="Email" required>
-      <input type="text" id="subject" placeholder="Относно (напр. семейно право, имотен казус)" required>
-      <textarea id="message" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
+    <!-- Класическа форма без JavaScript, за да няма какво да се счупи -->
+    <form action="https://formsubmit.co" method="POST">
+      
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="Ново запитване от GEORGIEVA LEGAL">
+      
+      <!-- Линк за връщане след изпращане -->
+      <input type="hidden" name="_next" value="https://github.io">
+      
+      <input type="text" name="Име" placeholder="Име" required>
+      <input type="email" name="Имейл" placeholder="Email" required>
+      <input type="text" name="Относно" placeholder="Относно (напр. семейно право, имотен казус)" required>
+      <textarea name="Описание на случая" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
       
       <button class="btn" type="submit">Изпрати запитване</button>
     </form>
@@ -157,40 +165,16 @@ footer {
 </footer>
 
 <script>
-document.getElementById('legalForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  var formContainer = document.getElementById('form-container');
-  
-  var formData = {
-    "Име": document.getElementById('name').value,
-    "Имейл": document.getElementById('email').value,
-    "Относно": document.getElementById('subject').value,
-    "Описание": document.getElementById('message').value,
-    "_captcha": "false"
-  };
-
-  // ПОПРАВЕНО: Добавен е пълният и точен адрес за изпращане до Вашата поща
-  fetch("https://formsubmit.co", {
-    method: "POST",
-    headers: { 
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify(formData)
-  })
-  .then(function() {
-    formContainer.innerHTML = `
+  // Показва съобщението за успех, когато сайтът се зареди обратно с маркера
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('status') === 'success') {
+    document.getElementById('form-container').innerHTML = `
       <div class="success-box">
         <h3>Запитването е изпратено успешно!</h3>
         <p>Благодарим Ви за доверието! Моля, очаквайте отговор от адвокат в най-кратък срок.</p>
       </div>
     `;
-  })
-  .catch(function() {
-    alert("Грешка при изпращането. Моля, опитайте пак или пишете на имейла ни.");
-  });
-});
+  }
 </script>
 
 </body>

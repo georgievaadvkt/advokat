@@ -141,12 +141,16 @@ footer {
   <h2>Изпрати запитване към адвокат</h2>
 
   <div id="form-container">
-    <!-- Изпращане чрез интелигентен AJAX към Formspree -->
-    <form id="ajaxForm">
-      <input type="text" id="insName" placeholder="Име" required>
-      <input type="email" id="insEmail" placeholder="Email" required>
-      <input type="text" id="insSubject" placeholder="Относно (напр. семейно право, имотен казус)" required>
-      <textarea id="insMessage" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
+    <!-- Директна чиста форма към Formspree -->
+    <form action="https://formspree.io" method="POST">
+      
+      <!-- След изпращане връща клиента обратно на сайта, за да види българското съобщение -->
+      <input type="hidden" name="_next" value="https://github.io">
+      
+      <input type="text" name="Име" placeholder="Име" required>
+      <input type="email" name="Имейл" placeholder="Email" required>
+      <input type="text" name="Относно" placeholder="Относно (напр. семейно право, имотен казус)" required>
+      <textarea name="Описание на случая" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
       
       <button class="btn" type="submit">Изпрати запитване</button>
     </form>
@@ -158,47 +162,18 @@ footer {
 </footer>
 
 <script>
-document.getElementById('ajaxForm').addEventListener('submit', function(e) {
-  e.preventDefault(); // Спира презареждането и чуждите екрани
-  
-  var formContainer = document.getElementById('form-container');
-  
-  var data = {
-    name: document.getElementById('insName').value,
-    email: document.getElementById('insEmail').value,
-    subject: document.getElementById('insSubject').value,
-    message: document.getElementById('insMessage').value
-  };
-
-  // Скрита връзка на заден план - БЕЗ пренасочване
-  fetch("https://formspree.io", {
-    method: "POST",
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then(function(response) {
-    if (response.ok) {
-      // Показва веднага текста за успех на клиента
-      formContainer.innerHTML = `
-        <div class="success-box">
-          <h3>Запитването е изпратено успешно!</h3>
-          <p>Благодарим Ви за доверието. Моля, очаквайте отговор от адвокат в най-кратък срок.</p>
-        </div>
-      `;
-    } else {
-      alert("Възникна грешка. Моля, пишете директно на elka_1976@abv.bg");
-    }
-  })
-  .catch(function() {
-    alert("Грешка в мрежата. Моля, опитайте пак.");
-  });
-});
+  // Скриптът само проверява дали клиентът се е върнал успешно, няма какво да се счупи
+  var urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('status') === 'success') {
+    document.getElementById('form-container').innerHTML = `
+      <div class="success-box">
+        <h3>Запитването е изпратено успешно!</h3>
+        <p>Благодарим Ви за доверието. Моля, очаквайте отговор от адвокат в най-кратък срок.</p>
+      </div>
+    `;
+  }
 </script>
 
 </body>
 </html>
-
 

@@ -141,19 +141,11 @@ footer {
   <h2>Изпрати запитване към адвокат</h2>
 
   <div id="form-container">
-    <!-- Използваме сигурен кодиран ключ на FormSubmit, за да заобиколим старата блокировка -->
-    <form action="https://formsubmit.co" method="POST">
-      
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_subject" value="Ново запитване от GEORGIEVA LEGAL">
-      
-      <!-- Връща потребителя обратно на твоя сайт -->
-      <input type="hidden" name="_next" value="https://github.io">
-      
-      <input type="text" name="Име" placeholder="Име" required>
-      <input type="email" name="Имейл" placeholder="Email" required>
-      <input type="text" name="Относно" placeholder="Относно (напр. семейно право, имотен казус)" required>
-      <textarea name="Описание на случая" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
+    <!-- Формата работи изцяло локално без никакви външни сайтове -->
+    <form id="directEmailForm">
+      <input type="text" id="clientName" placeholder="Вашето Име" required>
+      <input type="text" id="clientSubject" placeholder="Относно (напр. семейно право, имотен казус)" required>
+      <textarea id="clientMessage" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
       
       <button class="btn" type="submit">Изпрати запитване</button>
     </form>
@@ -165,16 +157,29 @@ footer {
 </footer>
 
 <script>
-  // Само проверява дали статусът в линка е success, няма какво да се прецака
-  var urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('status') === 'success') {
-    document.getElementById('form-container').innerHTML = `
-      <div class="success-box">
-        <h3>Запитването е изпратено успешно!</h3>
-        <p>Благодарим Ви за доверието. Моля, очаквайте отговор от адвокат в най-кратък срок.</p>
-      </div>
-    `;
-  }
+document.getElementById('directEmailForm').addEventListener('submit', function(e) {
+  e.preventDefault(); // Спира презареждането на страницата
+  
+  var name = document.getElementById('clientName').value;
+  var subj = document.getElementById('clientSubject').value;
+  var msg = document.getElementById('clientMessage').value;
+  
+  // Генерира директна мейл връзка към твоята поща с данните
+  var mailtoUrl = "mailto:elka_1976@abv.bg"
+    + "?subject=" + encodeURIComponent("Правно запитване: " + subj)
+    + "&body=" + encodeURIComponent("Име на клиента: " + name + "\n\nОписание на случая:\n" + msg);
+  
+  // Отваря пощенската програма на клиента веднага
+  window.location.href = mailtoUrl;
+  
+  // Показва веднага съобщението за успех на самия сайт
+  document.getElementById('form-container').innerHTML = `
+    <div class="success-box">
+      <h3>Запитването се подготвя!</h3>
+      <p>Вашата пощенска програма ще се отвори автоматично за изпращане на имейла. Очаквайте отговор от адвокат в най-кратък срок.</p>
+    </div>
+  `;
+});
 </script>
 
 </body>

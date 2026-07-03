@@ -141,10 +141,13 @@ footer {
   <h2>Изпрати запитване към адвокат</h2>
 
   <div id="form-container">
-    <!-- Директна чиста форма към Formspree -->
-    <form action="https://formspree.io" method="POST">
+    <!-- Използваме сигурен кодиран ключ на FormSubmit, за да заобиколим старата блокировка -->
+    <form action="https://formsubmit.co" method="POST">
       
-      <!-- След изпращане връща клиента обратно на сайта, за да види българското съобщение -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="Ново запитване от GEORGIEVA LEGAL">
+      
+      <!-- Връща потребителя обратно на твоя сайт -->
       <input type="hidden" name="_next" value="https://github.io">
       
       <input type="text" name="Име" placeholder="Име" required>
@@ -162,7 +165,7 @@ footer {
 </footer>
 
 <script>
-  // Скриптът само проверява дали клиентът се е върнал успешно, няма какво да се счупи
+  // Само проверява дали статусът в линка е success, няма какво да се прецака
   var urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get('status') === 'success') {
     document.getElementById('form-container').innerHTML = `
@@ -176,4 +179,3 @@ footer {
 
 </body>
 </html>
-

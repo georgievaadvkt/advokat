@@ -141,17 +141,13 @@ footer {
   <h2>Изпрати запитване към адвокат</h2>
 
   <div id="form-container">
-    <!-- Класическа форма без JavaScript, за да няма какво да се счупи -->
-    <form action="https://formsubmit.co" method="POST">
+    <!-- Свързано с новата сигурна система на Formspree -->
+    <form action="https://formspree.io" method="POST">
       
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_subject" value="Ново запитване от GEORGIEVA LEGAL">
-      
-      <!-- Линк за връщане след изпращане -->
       <input type="hidden" name="_next" value="https://github.io">
       
       <input type="text" name="Име" placeholder="Име" required>
-      <input type="email" name="Имейл" placeholder="Email" required>
+      <input type="email" name="_replyto" placeholder="Email" required>
       <input type="text" name="Относно" placeholder="Относно (напр. семейно право, имотен казус)" required>
       <textarea name="Описание на случая" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
       
@@ -165,7 +161,6 @@ footer {
 </footer>
 
 <script>
-  // Показва съобщението за успех, когато сайтът се зареди обратно с маркера
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get('status') === 'success') {
     document.getElementById('form-container').innerHTML = `

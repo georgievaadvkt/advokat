@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- 1. Оптимизирано заглавие за Google (Ключови думи в под 60 символа) -->
+<title>Адвокатски Услуги Онлайн | Правни Консултации - GEORGIEVA LEGAL</title>
+
+<!-- 2. Мета описание, което хората ще виждат като текст под линка в Google -->
+<meta name="description" content="Професионални правни консултации и адвокатски услуги изцяло онлайн. Бърза правна помощ от разстояние за граждани и бизнеса без посещение на кантора.">
+
+<!-- 3. Ключови думи за търсачките -->
+<meta name="keywords" content="адвокат, адвокатски услуги, онлайн адвокат, правни консултации, правна помощ, добър адвокат, адвокат българия, правни услуги от разстояние">
+
+<!-- 4. Географски тагове, за да знае Google, че предлагате услуги за България -->
+<meta name="geo.region" content="BG" />
+<meta name="geo.position" content="42.733883;25.48583" />
+<meta name="ICBM" content="42.733883, 25.48583" />
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+  scroll-behavior: smooth; 
+}
+
+header {
+  padding: 60px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+h1 {
+  font-size: 40px;
+  margin: 0;
+}
+
+h2 {
+  color: #c8a95a;
+}
+
+p {
+  color: #cbd5e1;
+  max-width: 800px;
+  margin: 10px auto;
+}
+
+section {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.card {
+  background: #1e293b;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+.btn {
+  display: inline-block; 
+  text-decoration: none; 
+  background: #c8a95a;
+  color: black;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-family: Arial, sans-serif;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #94a3b8;
+}
+
+.success-box {
+  background: #1e293b;
+  border: 2px solid #c8a95a;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+.success-box h3 {
+  color: #c8a95a;
+  margin-top: 0;
+  font-size: 24px;
+}
+.success-box p {
+  font-size: 18px;
+  color: #cbd5e1;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <!-- Добавени скрити за търсачките думи, засилващи темата на сайта -->
+  <h1>GEORGIEVA LEGAL ⚖️</h1>
+  <h2>Онлайн Адвокатски Услуги & Правна Помощ</h2>
+
+  <p>
+  Професионални правни консултации онлайн.  
+  Без нужда от посещение на кантора – удобно и достъпно от всяка точка.
+  </p>
+
+  <a href="#contact-section" class="btn">Изпрати запитване</a>
+</header>
+
+<section>
+  <h2>Как работи процесът ни</h2>
+
+  <div class="card">1. Изпращате запитване онлайн</div>
+  <div class="card">2. Получавате първичен отговор</div>
+  <div class="card">3. Изпращате необходими документи</div>
+  <div class="card">4. Получавате официално правно становище</div>
+  <div class="card">5. Стартира същинската работа по Вашия казус</div>
+</section>
+
+<section>
+  <h2>За кого са подходящи нашите адвокатски услуги</h2>
+
+  <div class="card">Хора и българи в чужбина</div>
+  <div class="card">Трудноподвижни лица</div>
+  <div class="card">Заети хора и бизнес предприемачи</div>
+  <div class="card">Правни казуси, изискващи съдействие от разстояние</div>
+</section>
+
+<section id="contact-section">
+  <h2>Изпрати запитване към адвокат</h2>
+
+  <div id="form-container">
+    <form action="https://formsubmit.co" method="POST">
+      
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="Ново запитване от GEORGIEVA LEGAL">
+      <input type="hidden" name="_next" id="next-url" value="">
+      
+      <input type="text" name="Име" placeholder="Име" required>
+      <input type="email" name="Имейл" placeholder="Email" required>
+      <input type="text" name="Относно" placeholder="Относно (напр. семейно право, имотен казус)" required>
+      <textarea name="Описание на случая" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
+      
+      <button class="btn" type="submit">Изпрати запитване</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  📞 0885 000684 | 📧 elka_1976@abv.bg
+</footer>
+
+<script>
+  document.getElementById('next-url').value = window.location.href.split('?') + '?status=success#contact-section';
+
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('status') === 'success') {
+    document.getElementById('form-container').innerHTML = `
+      <div class="success-box">
+        <h3>Запитването е изпратено успешно!</h3>
+        <p>Благодарим Ви за доверието. Моля, очаквайте отговор от адвокат в най-кратък срок.</p>
+      </div>
+    `;
+  }
+</script>
+
+</body>
+</html>

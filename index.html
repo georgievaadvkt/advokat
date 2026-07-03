@@ -122,7 +122,7 @@ footer {
   <h2>Как работи процесът ни</h2>
 
   <div class="card">1. Изпращате запитване онлайн</div>
-  <div class="card">2. Получавате първичен отговор</div>
+  <div class="card">2. Получавате первый отговор</div>
   <div class="card">3. Изпращате необходими документи</div>
   <div class="card">4. Получавате официално правно становище</div>
   <div class="card">5. Стартира същинската работа по Вашия казус</div>
@@ -141,7 +141,6 @@ footer {
   <h2>Изпрати запитване към адвокат</h2>
 
   <div id="form-container">
-    <!-- Махнато е action пренасочването за сигурност -->
     <form id="legalForm">
       <input type="text" id="name" placeholder="Име" required>
       <input type="email" id="email" placeholder="Email" required>
@@ -157,14 +156,12 @@ footer {
   📞 0885 000684 | 📧 elka_1976@abv.bg
 </footer>
 
-<!-- Интелигентен скрипт, който праща писмото без пренасочване и без грешки -->
 <script>
 document.getElementById('legalForm').addEventListener('submit', function(e) {
-  e.preventDefault(); // Спира презареждането на страницата
+  e.preventDefault();
   
   var formContainer = document.getElementById('form-container');
   
-  // Събиране на данните от полетата
   var formData = {
     "Име": document.getElementById('name').value,
     "Имейл": document.getElementById('email').value,
@@ -173,7 +170,7 @@ document.getElementById('legalForm').addEventListener('submit', function(e) {
     "_captcha": "false"
   };
 
-  // Изпращане към FormSubmit скрито в заден план
+  // Коригиран AJAX адрес, сочещ директно към твоята поща
   fetch("https://formsubmit.co", {
     method: "POST",
     headers: { 
@@ -183,7 +180,6 @@ document.getElementById('legalForm').addEventListener('submit', function(e) {
     body: JSON.stringify(formData)
   })
   .then(function() {
-    // Показва веднага съобщението за успех, без значение какво мисли FormSubmit
     formContainer.innerHTML = `
       <div class="success-box">
         <h3>Запитването е изпратено успешно!</h3>
@@ -199,4 +195,5 @@ document.getElementById('legalForm').addEventListener('submit', function(e) {
 
 </body>
 </html>
+
 

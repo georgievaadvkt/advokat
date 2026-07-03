@@ -65,40 +65,10 @@ section {
   margin-top: 15px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-input, textarea {
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-  font-family: Arial, sans-serif;
-}
-
 footer {
   text-align: center;
   padding: 20px;
   color: #94a3b8;
-}
-
-.success-box {
-  background: #1e293b;
-  border: 2px solid #c8a95a;
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-}
-.success-box h3 {
-  color: #c8a95a;
-  margin-top: 0;
-  font-size: 24px;
-}
-.success-box p {
-  font-size: 18px;
-  color: #cbd5e1;
 }
 </style>
 
@@ -115,7 +85,7 @@ footer {
   Без нужда от посещение на кантора – удобно и достъпно от всяка точка.
   </p>
 
-  <a href="#contact-section" class="btn">Изпрати запитване</a>
+  <a href="mailto:elka_1976@abv.bg" class="btn">Изпрати имейл</a>
 </header>
 
 <section>
@@ -137,50 +107,9 @@ footer {
   <div class="card">Правни казуси, изискващи съдействие от разстояние</div>
 </section>
 
-<section id="contact-section">
-  <h2>Изпрати запитване към адвокат</h2>
-
-  <div id="form-container">
-    <!-- Формата работи изцяло локално без никакви външни сайтове -->
-    <form id="directEmailForm">
-      <input type="text" id="clientName" placeholder="Вашето Име" required>
-      <input type="text" id="clientSubject" placeholder="Относно (напр. семейно право, имотен казус)" required>
-      <textarea id="clientMessage" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
-      
-      <button class="btn" type="submit">Изпрати запитване до имейл</button>
-    </form>
-  </div>
-</section>
-
 <footer>
   📞 0885 000684 | 📧 elka_1976@abv.bg
 </footer>
-
-<script>
-document.getElementById('directEmailForm').addEventListener('submit', function(e) {
-  e.preventDefault(); // Спира презареждането на страницата
-  
-  var name = document.getElementById('clientName').value;
-  var subj = document.getElementById('clientSubject').value;
-  var msg = document.getElementById('clientMessage').value;
-  
-  // Генерира директна мейл връзка към твоята поща с данните
-  var mailtoUrl = "mailto:elka_1976@abv.bg"
-    + "?subject=" + encodeURIComponent("Правно запитване: " + subj)
-    + "&body=" + encodeURIComponent("Име на клиента: " + name + "\n\nОписание на случая:\n" + msg);
-  
-  // Отваря пощенската програма на клиента веднага
-  window.location.href = mailtoUrl;
-  
-  // Показва веднага съобщението за успех на самия сайт
-  document.getElementById('form-container').innerHTML = `
-    <div class="success-box">
-      <h3>Запитването се подготвя!</h3>
-      <p>Вашата пощенска програма ще се отвори автоматично за изпращане на имейла. Очаквайте отговор от адвокат в най-кратък срок.</p>
-    </div>
-  `;
-});
-</script>
 
 </body>
 </html>

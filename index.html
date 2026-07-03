@@ -7,7 +7,7 @@
 <title>Адвокатски Услуги Онлайн | Правни Консултации - GEORGIEVA LEGAL</title>
 
 <meta name="description" content="Професионални правни консултации и адвокатски услуги изцяло онлайн. Бърза правна помощ от разстояние за граждани и бизнеса, без посещение на кантора.">
-<meta name="keywords" content="адвокат, адвокатски услуги, онлайн адвокат, правни консултации, правна помощ, добър адвокат, адвокат българия, правни услуги от разстояние">
+<meta name="keywords" content="адвокат, адвокатски услуги, online адвокат, правни консултации, правна помощ, добър адвокат, адвокат българия, правни услуги от разстояние">
 
 <style>
 body {
@@ -141,17 +141,13 @@ footer {
   <h2>Изпрати запитване към адвокат</h2>
 
   <div id="form-container">
-    <!-- ИЗЧИСТЕН ЧИСТ HTML: Без скапващ се JavaScript скрипт. Свързано директно към Вашата поща -->
-    <form action="https://formsubmit.co" method="POST">
+    <!-- Сменено към сигурната система на Formspree -->
+    <form action="https://formspree.io" method="POST">
       
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_subject" value="Ново запитване от GEORGIEVA LEGAL">
-      
-      <!-- Автоматично връща потребителя обратно на Вашия сайт без грешки -->
       <input type="hidden" name="_next" value="https://github.io">
       
       <input type="text" name="Име" placeholder="Име" required>
-      <input type="email" name="Имейл" placeholder="Email" required>
+      <input type="email" name="_replyto" placeholder="Email" required>
       <input type="text" name="Относно" placeholder="Относно (напр. семейно право, имотен казус)" required>
       <textarea name="Описание на случая" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
       
@@ -165,7 +161,6 @@ footer {
 </footer>
 
 <script>
-  // Проверява дали потребителят се е върнал след изпращане
   var urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get('status') === 'success') {
     document.getElementById('form-container').innerHTML = `
@@ -179,4 +174,5 @@ footer {
 
 </body>
 </html>
+
 

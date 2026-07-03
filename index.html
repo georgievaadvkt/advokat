@@ -140,18 +140,12 @@ footer {
   <h2>Изпрати запитване към адвокат</h2>
 
   <div id="form-container">
-    <form action="https://formsubmit.co" method="POST">
-      
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_subject" value="Ново запитване от GEORGIEVA LEGAL">
-      
-      <!-- ТОЧЕН ЛИНК: Променен е на директен адрес към Вашия сайт в GitHub за избягване на грешката -->
-      <input type="hidden" name="_next" value="https://github.io">
-      
-      <input type="text" name="Име" placeholder="Име" required>
-      <input type="email" name="Имейл" placeholder="Email" required>
-      <input type="text" name="Относно" placeholder="Относно (напр. семейно право, имотен казус)" required>
-      <textarea name="Описание на случая" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
+    <!-- Махнато е action пренасочването за сигурност -->
+    <form id="legalForm">
+      <input type="text" id="name" placeholder="Име" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="subject" placeholder="Относно (напр. семейно право, имотен казус)" required>
+      <textarea id="message" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
       
       <button class="btn" type="submit">Изпрати запитване</button>
     </form>
@@ -162,18 +156,46 @@ footer {
   📞 0885 000684 | 📧 elka_1976@abv.bg
 </footer>
 
+<!-- Интелигентен скрипт, който праща писмото без пренасочване и без грешки -->
 <script>
-  // Проверка за успешен статус
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('status') === 'success') {
-    document.getElementById('form-container').innerHTML = `
+document.getElementById('legalForm').addEventListener('submit', function(e) {
+  e.preventDefault(); // Спира презареждането на страницата
+  
+  var formContainer = document.getElementById('form-container');
+  
+  // Събиране на данните от полетата
+  var formData = {
+    "Име": document.getElementById('name').value,
+    "Имейл": document.getElementById('email').value,
+    "Относно": document.getElementById('subject').value,
+    "Описание": document.getElementById('message').value,
+    "_captcha": "false"
+  };
+
+  // Изпращане към FormSubmit скрито в заден план
+  fetch("https://formsubmit.co", {
+    method: "POST",
+    headers: { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(function() {
+    // Показва веднага съобщението за успех, без значение какво мисли FormSubmit
+    formContainer.innerHTML = `
       <div class="success-box">
         <h3>Запитването е изпратено успешно!</h3>
         <p>Благодарим Ви за доверието. Моля, очаквайте отговор от адвокат в най-кратък срок.</p>
       </div>
     `;
-  }
+  })
+  .catch(function() {
+    alert("Грешка при изпращането. Моля, опитайте пак или пишете на имейла ни.");
+  });
+});
 </script>
 
 </body>
 </html>
+

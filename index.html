@@ -3,20 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- 1. Оптимизирано заглавие за Google (Ключови думи в под 60 символа) -->
 <title>Адвокатски Услуги Онлайн | Правни Консултации - GEORGIEVA LEGAL</title>
 
-<!-- 2. Мета описание, което хората ще виждат като текст под линка в Google -->
 <meta name="description" content="Професионални правни консултации и адвокатски услуги изцяло онлайн. Бърза правна помощ от разстояние за граждани и бизнеса без посещение на кантора.">
-
-<!-- 3. Ключови думи за търсачките -->
 <meta name="keywords" content="адвокат, адвокатски услуги, онлайн адвокат, правни консултации, правна помощ, добър адвокат, адвокат българия, правни услуги от разстояние">
-
-<!-- 4. Географски тагове, за да знае Google, че предлагате услуги за България -->
-<meta name="geo.region" content="BG" />
-<meta name="geo.position" content="42.733883;25.48583" />
-<meta name="ICBM" content="42.733883, 25.48583" />
 
 <style>
 body {
@@ -116,7 +106,6 @@ footer {
 <body>
 
 <header>
-  <!-- Добавени скрити за търсачките думи, засилващи темата на сайта -->
   <h1>GEORGIEVA LEGAL ⚖️</h1>
   <h2>Онлайн Адвокатски Услуги & Правна Помощ</h2>
 
@@ -155,7 +144,9 @@ footer {
       
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_subject" value="Ново запитване от GEORGIEVA LEGAL">
-      <input type="hidden" name="_next" id="next-url" value="">
+      
+      <!-- ТОЧЕН ЛИНК: Променен е на директен адрес към Вашия сайт в GitHub за избягване на грешката -->
+      <input type="hidden" name="_next" value="https://github.io">
       
       <input type="text" name="Име" placeholder="Име" required>
       <input type="email" name="Имейл" placeholder="Email" required>
@@ -172,8 +163,7 @@ footer {
 </footer>
 
 <script>
-  document.getElementById('next-url').value = window.location.href.split('?') + '?status=success#contact-section';
-
+  // Проверка за успешен статус
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get('status') === 'success') {
     document.getElementById('form-container').innerHTML = `

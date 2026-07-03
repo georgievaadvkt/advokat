@@ -141,15 +141,11 @@ footer {
   <h2>Изпрати запитване към адвокат</h2>
 
   <div id="form-container">
-    <!-- Свързано с новата сигурна система на Formspree -->
-    <form action="https://formspree.io" method="POST">
-      
-      <input type="hidden" name="_next" value="https://github.io">
-      
-      <input type="text" name="Име" placeholder="Име" required>
-      <input type="email" name="_replyto" placeholder="Email" required>
-      <input type="text" name="Относно" placeholder="Относно (напр. семейно право, имотен казус)" required>
-      <textarea name="Описание на случая" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
+    <!-- Формата пренасочва директно към пощенската програма на клиента -->
+    <form id="directMailForm">
+      <input type="text" id="name" placeholder="Вашето Име" required>
+      <input type="text" id="subject" placeholder="Относно (напр. семейно право, имотен казус)" required>
+      <textarea id="message" rows="5" placeholder="Описание на Вашия правен казус..." required></textarea>
       
       <button class="btn" type="submit">Изпрати запитване</button>
     </form>
@@ -161,15 +157,29 @@ footer {
 </footer>
 
 <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('status') === 'success') {
-    document.getElementById('form-container').innerHTML = `
-      <div class="success-box">
-        <h3>Запитването е изпратено успешно!</h3>
-        <p>Благодарим Ви за доверието! Моля, очаквайте отговор от адвокат в най-кратък срок.</p>
-      </div>
-    `;
-  }
+document.getElementById('directMailForm').addEventListener('submit', function(e) {
+  e.preventDefault(); // Спира презареждането
+  
+  var name = document.getElementById('name').value;
+  var subject = document.getElementById('subject').value;
+  var message = document.getElementById('message').value;
+  
+  // Създава се директен мейл линк с попълнени данни
+  var mailtoLink = "mailto:elka_1976@abv.bg"
+    + "?subject=" + encodeURIComponent("Запитване от: " + subject)
+    + "&body=" + encodeURIComponent("Име на клиента: " + name + "\n\nОписание на случая:\n" + message);
+  
+  // Отваря пощата на клиента
+  window.location.href = mailtoLink;
+  
+  // Показва веднага съобщението за успех на сайта
+  document.getElementById('form-container').innerHTML = `
+    <div class="success-box">
+      <h3>Запитването се подготвя!</h3>
+      <p>Вашата пощенска програма ще се отвори автоматично за изпращане. Очаквайте отговор от адвокат в най-кратък срок.</p>
+    </div>
+  `;
+});
 </script>
 
 </body>
